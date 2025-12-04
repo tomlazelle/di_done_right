@@ -12,9 +12,12 @@ class DIException(Exception):
 class ServiceNotRegisteredException(DIException):
     """Raised when trying to resolve a service that hasn't been registered."""
 
-    def __init__(self, service_type: type) -> None:
+    def __init__(self, service_type: type, message: str | None = None) -> None:
         self.service_type = service_type
-        super().__init__(f"Service of type {service_type} is not registered.")
+        if message:
+            super().__init__(message)
+        else:
+            super().__init__(f"Service of type {service_type} is not registered.")
 
 
 class CircularDependencyException(DIException):

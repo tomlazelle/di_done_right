@@ -227,7 +227,7 @@ class DIContainer:
                     raise ServiceNotRegisteredException(service_type)
                 else:
                     raise ServiceNotRegisteredException(
-                        f"{service_type} with key '{key}'"
+                        service_type, f"Service of type {service_type} with key '{key}' is not registered."
                     )
 
             result: T = self._create_instance(registration)
