@@ -2,6 +2,11 @@
 requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project.urls]
+homepage = "https://github.com/yourusername/di-done-right"
+repository = "https://github.com/yourusername/di-done-right"
+documentation = "https://github.com/yourusername/di-done-right#documentation"
+
 [project]
 name = "di-done-right"
 version = "1.0.0"
@@ -11,9 +16,6 @@ license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.8"
 keywords = ["dependency-injection", "di", "ioc", "inversion-of-control", "dotnet", "fastapi"]
-homepage = "https://github.com/yourusername/di-done-right"
-repository = "https://github.com/yourusername/di-done-right"
-documentation = "https://github.com/yourusername/di-done-right#documentation"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
