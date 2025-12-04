@@ -160,7 +160,7 @@ class FastAPIIntegration:
         """
 
         @asynccontextmanager
-        async def lifespan(app) -> AsyncGenerator[None, None]:
+        async def lifespan(app: Any) -> AsyncGenerator[None, None]:
             # Startup
             ServiceProvider.configure(configuration_func)
             yield
@@ -174,13 +174,13 @@ class FastAPIIntegration:
 class ScopeCleanupMiddleware:
     """Middleware to ensure scoped services are properly cleaned up after requests."""
 
-    def __init__(self, app):
+    def __init__(self, app: Any) -> None:
         self.app = app
 
-    async def __call__(self, scope, receive, send):
+    async def __call__(self, scope: dict, receive: Any, send: Any) -> None:
         if scope["type"] == "http":
             # Create a custom send function to clean up after response
-            async def cleanup_send(message):
+            async def cleanup_send(message: dict) -> None:
                 await send(message)
                 # Clean up scope after response is sent
                 if message["type"] == "http.response.body" and not message.get(
@@ -206,7 +206,8 @@ def inject(service_type: Type[T]) -> T:
         def get_users(user_service: IUserService = Depends(inject)):
             return user_service.get_all_users()
     """
-    return Depends(FastAPIIntegration.get_service(service_type))
+    result: T = Depends(FastAPIIntegration.get_service(service_type))
+    return result
 
 
 def inject_keyed(service_type: Type[T], key: Any) -> T:
@@ -222,7 +223,10 @@ def inject_keyed(service_type: Type[T], key: Any) -> T:
         ):
             return paypal.process_payment(100.0)
     """
-    return Depends(FastAPIIntegration.get_keyed_service(service_type, key))
+    result: T = Depends(
+        FastAPIIntegration.get_keyed_service(service_type, key)
+    )
+    return result
 
 
 def inject_scoped(service_type: Type[T]) -> T:
@@ -234,4 +238,5 @@ def inject_scoped(service_type: Type[T]) -> T:
         def get_data(repository: IRepository = Depends(inject_scoped)):
             return repository.get_data()
     """
-    return Depends(FastAPIIntegration.get_scoped_service(service_type))
+    result: T = Depends(FastAPIIntegration.get_scoped_service(service_type))
+    return result

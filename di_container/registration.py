@@ -54,7 +54,7 @@ class ServiceRegistration:
 class ServiceRegistry:
     """Manages service registrations."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Store registrations by (Type, Optional[Key]) tuple
         self._registrations: dict[tuple[Type, Any], ServiceRegistration] = {}
 

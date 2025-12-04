@@ -12,7 +12,7 @@ class DIException(Exception):
 class ServiceNotRegisteredException(DIException):
     """Raised when trying to resolve a service that hasn't been registered."""
 
-    def __init__(self, service_type):
+    def __init__(self, service_type: type) -> None:
         self.service_type = service_type
         super().__init__(f"Service of type {service_type} is not registered.")
 
@@ -20,7 +20,7 @@ class ServiceNotRegisteredException(DIException):
 class CircularDependencyException(DIException):
     """Raised when a circular dependency is detected."""
 
-    def __init__(self, dependency_chain):
+    def __init__(self, dependency_chain: list) -> None:
         self.dependency_chain = dependency_chain
         chain_str = " -> ".join(str(t) for t in dependency_chain)
         super().__init__(f"Circular dependency detected: {chain_str}")

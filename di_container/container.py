@@ -20,7 +20,7 @@ T = TypeVar("T")
 class DIScope:
     """Represents a scope for scoped services."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._scoped_instances: Dict[tuple[Type, Any], Any] = {}
 
     def get_scoped_instance(
@@ -48,7 +48,7 @@ class DIScope:
 class DIContainer:
     """Main dependency injection container."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._registry = ServiceRegistry()
         self._singleton_instances: Dict[tuple[Type, Any], Any] = {}
         self._current_scope: Optional[DIScope] = None
@@ -230,7 +230,8 @@ class DIContainer:
                         f"{service_type} with key '{key}'"
                     )
 
-            return self._create_instance(registration)
+            result: T = self._create_instance(registration)
+            return result
         finally:
             if self._resolution_stack and self._resolution_stack[-1] == service_key:
                 self._resolution_stack.pop()
@@ -274,9 +275,17 @@ class DIContainer:
             return registration.instance
 
         elif registration.strategy == RegistrationStrategy.TYPE_TO_FACTORY:
+            if registration.factory is None:
+                raise InvalidRegistrationException(
+                    "Factory cannot be None for TYPE_TO_FACTORY strategy"
+                )
             return self._invoke_factory(registration.factory)
 
         elif registration.strategy == RegistrationStrategy.TYPE_TO_TYPE:
+            if registration.implementation_type is None:
+                raise InvalidRegistrationException(
+                    "Implementation type cannot be None for TYPE_TO_TYPE"
+                )
             return self._create_type_instance(registration.implementation_type)
 
         else:
@@ -367,7 +376,8 @@ class DIContainer:
 
     def is_registered(self, service_type: Type[T], key: Optional[Any] = None) -> bool:
         """Check if a service type is registered with optional key."""
-        return self._registry.is_registered(service_type, key)
+        result: bool = self._registry.is_registered(service_type, key)
+        return result
 
     def get_all_services(self, service_type: Type[T]) -> List[T]:
         """Get all registered services for a given type (including keyed services)."""
