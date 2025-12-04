@@ -24,3 +24,6 @@
 
 - [x] Ensure Documentation is Complete
 	<!-- README.md and copilot-instructions.md are complete with project information -->
+
+- [x] Check that line length does not exceed 80 characters
+	<!-- All code and comments formatted to adhere to 80 character limit -->

@@ -65,7 +65,8 @@ class DIContainer:
 
         Args:
             service_type: The service type to register (interface or concrete type)
-            implementation_type: The implementation type. If None, service_type will be registered to itself
+            implementation_type: The implementation type.
+            If None, service_type will be registered to itself
             lifetime: The service lifetime (default: TRANSIENT)
 
         Examples:
