@@ -46,8 +46,12 @@ class ServiceProvider:
 
         Example:
             def configure_services(container: DIContainer):
-                container.register(IUserService, UserService, ServiceLifetime.SINGLETON)
-                container.register(IRepository, DatabaseRepository, ServiceLifetime.SCOPED)
+                container.register(
+                    IUserService, UserService, ServiceLifetime.SINGLETON
+                )
+                container.register(
+                    IRepository, DatabaseRepository, ServiceLifetime.SCOPED
+                )
 
             ServiceProvider.configure(configure_services)
         """
@@ -64,7 +68,8 @@ class ServiceProvider:
         """Get the configured container."""
         if not cls._is_configured or cls._container is None:
             raise ContainerNotConfiguredException(
-                "ServiceProvider not configured. Call ServiceProvider.configure() first."
+                "ServiceProvider not configured. Call "
+                "ServiceProvider.configure() first."
             )
         return cls._container
 

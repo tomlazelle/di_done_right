@@ -37,7 +37,11 @@ class FastAPIIntegration:
 
         Usage:
             @app.get("/users")
-            def get_users(user_service: IUserService = Depends(FastAPIIntegration.get_service(IUserService))):
+            def get_users(
+                user_service: IUserService = Depends(
+                    FastAPIIntegration.get_service(IUserService)
+                )
+            ):
                 return user_service.get_all_users()
         """
 
@@ -77,7 +81,9 @@ class FastAPIIntegration:
         Usage:
             @app.get("/data")
             def get_data(
-                repository: IRepository = Depends(FastAPIIntegration.get_scoped_service(IRepository))
+                repository: IRepository = Depends(
+                    FastAPIIntegration.get_scoped_service(IRepository)
+                )
             ):
                 return repository.get_data()
         """
@@ -110,7 +116,11 @@ class FastAPIIntegration:
         Usage:
             @app.get("/cache")
             def get_cache_data(
-                redis_cache: ICache = Depends(FastAPIIntegration.get_keyed_scoped_service(ICache, "redis"))
+                redis_cache: ICache = Depends(
+                    FastAPIIntegration.get_keyed_scoped_service(
+                        ICache, "redis"
+                    )
+                )
             ):
                 return redis_cache.get("data")
         """
@@ -142,7 +152,11 @@ class FastAPIIntegration:
             def configure_services(container):
                 container.register(IUserService, UserService)
 
-            app = FastAPI(lifespan=FastAPIIntegration.create_lifespan_manager(configure_services))
+            app = FastAPI(
+                lifespan=FastAPIIntegration.create_lifespan_manager(
+                    configure_services
+                )
+            )
         """
 
         @asynccontextmanager
@@ -201,7 +215,11 @@ def inject_keyed(service_type: Type[T], key: Any) -> T:
 
     Usage:
         @app.get("/payment")
-        def process_payment(paypal: IPaymentService = Depends(lambda: inject_keyed(IPaymentService, "paypal"))):
+        def process_payment(
+            paypal: IPaymentService = Depends(
+                lambda: inject_keyed(IPaymentService, "paypal")
+            )
+        ):
             return paypal.process_payment(100.0)
     """
     return Depends(FastAPIIntegration.get_keyed_service(service_type, key))

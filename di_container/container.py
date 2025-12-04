@@ -98,7 +98,8 @@ class DIContainer:
         Args:
             service_type: The service type to register
             key: The key to associate with this registration
-            implementation_type: The implementation type. If None, service_type will be registered to itself
+            implementation_type: The implementation type. If None,
+                service_type will be registered to itself
             lifetime: The service lifetime (default: TRANSIENT)
 
         Examples:
@@ -310,7 +311,8 @@ class DIContainer:
 
             if param_type == inspect.Parameter.empty:
                 raise InvalidRegistrationException(
-                    f"Parameter '{param_name}' in {implementation_type} has no type annotation"
+                    f"Parameter '{param_name}' in "
+                    f"{implementation_type} has no type annotation"
                 )
 
             # Handle optional parameters

@@ -389,7 +389,8 @@ class TestDIContainer:
         assert isinstance(stripe_service, StripeService)
         assert isinstance(paypal_service, PayPalService)
 
-        # Default and keyed paypal should be different instances (different registrations)
+        # Default and keyed paypal should be different instances
+        # (different registrations)
         assert default_service is not paypal_service
 
     def test_get_all_services(self):
