@@ -223,9 +223,7 @@ def inject_keyed(service_type: Type[T], key: Any) -> T:
         ):
             return paypal.process_payment(100.0)
     """
-    result: T = Depends(
-        FastAPIIntegration.get_keyed_service(service_type, key)
-    )
+    result: T = Depends(FastAPIIntegration.get_keyed_service(service_type, key))
     return result
 
 
