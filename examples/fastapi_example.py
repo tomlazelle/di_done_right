@@ -16,6 +16,7 @@ Note: This file won't run without FastAPI installed, but shows the integration p
 
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
+
 from di_container import DIContainer, ServiceLifetime
 
 
@@ -25,7 +26,7 @@ class User:
         self.id = id
         self.name = name
         self.email = email
-    
+
     def to_dict(self) -> dict:
         return {"id": self.id, "name": self.name, "email": self.email}
 
@@ -34,11 +35,11 @@ class IUserRepository(ABC):
     @abstractmethod
     def get_user(self, user_id: int) -> Optional[User]:
         pass
-    
+
     @abstractmethod
     def get_all_users(self) -> List[User]:
         pass
-    
+
     @abstractmethod
     def create_user(self, name: str, email: str) -> User:
         pass
@@ -62,18 +63,18 @@ class InMemoryUserRepository(IUserRepository):
         self.logger = logger
         self._users: Dict[int, User] = {
             1: User(1, "John Doe", "john@example.com"),
-            2: User(2, "Jane Smith", "jane@example.com")
+            2: User(2, "Jane Smith", "jane@example.com"),
         }
         self._next_id = 3
-    
+
     def get_user(self, user_id: int) -> Optional[User]:
         self.logger.log(f"Repository: Getting user {user_id}")
         return self._users.get(user_id)
-    
+
     def get_all_users(self) -> List[User]:
         self.logger.log("Repository: Getting all users")
         return list(self._users.values())
-    
+
     def create_user(self, name: str, email: str) -> User:
         self.logger.log(f"Repository: Creating user {name}")
         user = User(self._next_id, name, email)
@@ -90,7 +91,7 @@ class ConsoleLogger(ILogger):
 class EmailService(IEmailService):
     def __init__(self, logger: ILogger):
         self.logger = logger
-    
+
     def send_welcome_email(self, user: User) -> None:
         self.logger.log(f"Sending welcome email to {user.email}")
 
@@ -189,6 +190,7 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 """
 
+
 def show_fastapi_example():
     """Show how the FastAPI integration would work."""
     print("=== FastAPI Integration Example ===")
@@ -199,12 +201,12 @@ def show_fastapi_example():
     print("3. Scoped services per request")
     print("4. Middleware for proper cleanup")
     print("5. Integration with FastAPI's dependency system")
-    
+
     print("\nTo use this with FastAPI:")
     print("1. Install FastAPI: pip install fastapi uvicorn")
     print("2. Uncomment the FastAPI code in this file")
     print("3. Run: uvicorn fastapi_example:app --reload")
-    
+
     print("\nExample usage patterns:")
     print("- Use inject(ServiceType) for singleton/transient services")
     print("- Use inject_scoped(ServiceType) for scoped services")
