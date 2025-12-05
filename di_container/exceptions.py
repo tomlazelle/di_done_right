@@ -2,6 +2,8 @@
 Custom exceptions for the DI container.
 """
 
+from typing import Optional
+
 
 class DIException(Exception):
     """Base exception for DI container errors."""
@@ -12,7 +14,7 @@ class DIException(Exception):
 class ServiceNotRegisteredException(DIException):
     """Raised when trying to resolve a service that hasn't been registered."""
 
-    def __init__(self, service_type: type, message: str | None = None) -> None:
+    def __init__(self, service_type: type, message: Optional[str] = None) -> None:
         self.service_type = service_type
         if message:
             super().__init__(message)
