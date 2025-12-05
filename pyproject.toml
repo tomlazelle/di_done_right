@@ -3,18 +3,18 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-homepage = "https://github.com/yourusername/di-done-right"
-repository = "https://github.com/yourusername/di-done-right"
-documentation = "https://github.com/yourusername/di-done-right#documentation"
+homepage = "https://github.com/tomlazelle/di_done_right"
+repository = "https://github.com/tomlazelle/di_done_right"
+documentation = "https://github.com/tomlazelle/di_done_right#documentation"
 
 [project]
 name = "di-done-right"
 version = "1.0.0"
 description = "A modern dependency injection framework for Python inspired by .NET DI"
-authors = [{name = "Your Name", email = "your.email@example.com"}]
+authors = [{name = "Tom Lazelle", email = "tomlazelle@yahoo.com"}]
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 keywords = ["dependency-injection", "di", "ioc", "inversion-of-control", "dotnet", "fastapi"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -22,7 +22,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -56,14 +55,14 @@ include = ["di_container*"]
 
 [tool.black]
 line-length = 88
-target-version = ['py38']
+target-version = ['py39']
 
 [tool.isort]
 profile = "black"
 multi_line_output = 3
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
