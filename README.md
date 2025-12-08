@@ -42,7 +42,13 @@ user_service = get_service(IUserService)
 ## Installation
 
 ```bash
-pip install -e .
+pip install di-done-right
+
+# For FastAPI integration support
+pip install di-done-right[fastapi]
+
+# For development
+pip install di-done-right[dev]
 ```
 
 ## Usage Examples
@@ -162,11 +168,11 @@ finally:
 
 ### Getting Started
 
-See the [Quick Reference Guide](QUICK_REFERENCE.md) for common patterns and immediate usage.
+See the [Quick Reference Guide](./QUICK_REFERENCE.md) for common patterns and immediate usage.
 
 ### Comprehensive Documentation
 
-The [Complete User Documentation](DOCUMENTATION.md) includes:
+The [Complete User Documentation](./DOCUMENTATION.md) includes:
 
 - Detailed API reference
 - Advanced usage patterns

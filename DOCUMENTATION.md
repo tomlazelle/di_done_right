@@ -20,10 +20,7 @@
 ### Installation
 
 ```bash
-pip install -e .
-
-# For FastAPI integration
-pip install -e ".[fastapi]"
+pip install di-done-right
 ```
 
 ### Basic Setup
@@ -120,7 +117,7 @@ Use this for pre-configured objects or third-party services:
 ```python
 # Create a configured instance
 database_config = DatabaseConfig(
-    connection_string="Server=localhost;Database=MyApp",
+    connection_string="<YourConnectionStringHere>",
     timeout=30
 )
 
